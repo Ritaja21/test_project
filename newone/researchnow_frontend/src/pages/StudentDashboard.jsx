@@ -154,103 +154,118 @@ const StudentDashboard = () => {
   if (!student) return <p>Loading...</p>;
 
   return (
-    <div className="dashboard-container">
-      <h1>Student Dashboard</h1>
-
-      {/* Student Info Section */}
-      <div className="user-info">
-        <h2>
-          {editable ? (
-            <input type="text" name="name" value={updatedData.name || ""} onChange={handleChange} />
+    <div className="student-dashboard-container">
+      {/*LEFT - Profile Section*/}
+      <div className="student-left">
+        <div className="profile-card">
+          <h2>{editable ? "Edit Profile" : student.name}</h2>
+          <p><strong>Email:</strong> {student.email}</p>
+          <p><strong>Branch:</strong> {editable ? (
+            <input type="text" name="branch" value={updatedData.branch || ""} onChange={handleChange} />
           ) : (
-            student.name
-          )}
-        </h2>
-
-        <p>
-          <strong>Domain:</strong>{" "}
-          {editable ? (
-            <input type="text" name="domain" value={updatedData.domain || ""} onChange={handleChange} />
+            student.branch || "N/A"
+          )}</p>
+          <p><strong>Skills:</strong> {editable ? (
+            <input type="text" name="skills" value={updatedData.skills || ""} onChange={handleChange} />
           ) : (
-            student.domain
-          )}
-        </p>
+            student.skills || "N/A"
+          )}</p>
+          <p><strong>About Me:</strong>{" "}
+            {editable ? (
+              <textarea name="about" value={updatedData.about || ""} onChange={handleChange} />
+            ) : (
+              student.about || "No description yet."
+            )}
+          </p>
 
-        <p>
-          <strong>Contact:</strong>{" "}
           {editable ? (
-            <input type="text" name="contact" value={updatedData.contact || ""} onChange={handleChange} />
+            <button className="savebtn" onClick={handleSave}>Save</button>
           ) : (
-            student.contact
+            <button className="editbtn" onClick={() => setEditable(true)}>Edit Profile</button>
           )}
-        </p>
-
-        <p>
-          <strong>About Me:</strong>{" "}
-          {editable ? (
-            <textarea name="about" value={updatedData.about || ""} onChange={handleChange} />
-          ) : (
-            student.about
-          )}
-        </p>
-
-        <p>
-          <strong>Email:</strong> {student.email} (Cannot be changed)
-        </p>
-
-        {/* Edit / Save Button */}
-        {editable ? (
-          <button className="savebtn" onClick={handleSave}>Save Changes</button>
-        ) : (
-          <button className="editbtn" onClick={() => setEditable(true)}>Edit Profile</button>
-        )}
-      </div>
-
-      {/* Display Projects */}
-      <div className="projects-section">
-        <h2>My Projects</h2>
-        {student.projects && student.projects.length > 0 ? (
-          <ul>
-            {student.projects.map((project) => (
-              <li key={project._id}>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <button className="chatbtn" onClick={() => openChat(project._id)}>Open Chat Room</button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No projects added yet.</p>
-        )}
-      </div>
-
-      {/* Chatbox Section */}
-      {selectedProject && (
-        <div className="chatbox">
-          <h3>Project Chat Room</h3>
-          <div className="chat-messages">
-            {chat[selectedProject]?.map((msg, index) => (
-              <p key={index}>
-                <strong>{msg.sender.name || "You"}:</strong> {msg.content}
-              </p>
-            ))}
-          </div>
-          <div className="chat-input">
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type a message..."
-            />
-            <button className="sendbtn" onClick={sendMessage}>Send</button>
-          </div>
         </div>
-      )}
+      </div>
+      {/*MIDDLE- PROJECTS*/}
+      <div className="student-middle">
+        <div className="projects-section">
+          <div className="projects-header">
+            <h2>My Projects</h2>
+            <button className="explorebtn" onClick={() => navigate("/opportunities")}> +Explore</button>
+          </div>
+          {student.projects && student.projects.length > 0 ? (
+            <ul>
+              {student.projects.map((project) => (
+                <li key={project._id}>
+                  <h3>{project.title}</h3>
+                  <button className="chatbtn" onClick={() => openChat(project._id)}>
+                    Show Chats
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No projects enrolled yet.</p>
+          )}
+        </div>
+      </div>
 
-      {/* Explore Projects Button */}
-      <button className="explore-projects-btn" onClick={() => navigate("/opportunities")}>
-        Explore Opportunities
-      </button>
+
+      {/* RIGHT- Chat Section */}
+      <div className="student-right">
+        <div className="chatbox">
+          <h3>Chat</h3>
+          {/* {selectedProject && (
+            <div className="chatbox">
+              <h3>Project Chat Room</h3>
+              <div className="chat-messages">
+                {chat[selectedProject]?.map((msg, index) => (
+                  <p key={index}>
+                    <strong>{msg.sender.name || "You"}:</strong> {msg.content}
+                  </p>
+                ))}
+              </div>
+              <div className="chat-input">
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Type a message..."
+                />
+                <button className="sendbtn" onClick={sendMessage}>Send</button>
+              </div>
+            </div>
+          )} */}
+          {selectedProject ? (
+            <div className="chatbox">
+              <h3>Project Chat Room</h3>
+
+              <div className="chat-messages">
+                {chat[selectedProject]?.length > 0 ? (
+                  chat[selectedProject].map((msg, index) => (
+                    <p key={index}>
+                      <strong>{msg.sender?.name || "You"}:</strong> {msg.content}
+                    </p>
+                  ))
+                ) : (
+                  <p className="no-messages">No messages yet. Start the conversation!</p>
+                )}
+              </div>
+
+              <div className="chat-input">
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Type a message..."
+                />
+                <button className="sendbtn" onClick={sendMessage}>Send</button>
+              </div>
+            </div>
+          ) : (
+            <p className="select-chat-text">Select a project to start chatting with your student.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

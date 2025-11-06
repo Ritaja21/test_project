@@ -6,15 +6,14 @@
   justify-content: center;
   padding: 4rem 5rem;
   text-align: center;
-  margin-top: 5px;
-  gap: 15rem;
+  gap: 6rem;
 }
 
 @media (min-width: 1024px) {
   .hero-section {
     flex-direction: row;
-    text-align: left;
     justify-content: space-between;
+    text-align: left;
   }
 }
 
@@ -29,7 +28,7 @@
   background-color: #f3a8a8;
   border: none;
   color: black;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 600;
   padding: 1rem 2rem;
   border-radius: 50px;
@@ -41,36 +40,41 @@
   background-color: #f08585;
 }
 
-/* Swiper Styles */
+/* Swiper */
 .hero-swiper {
   width: 100%;
   max-width: 600px;
-  margin-top: 2rem;
 }
 
 .swiper-container {
+  margin-left: 50px;
   width: 100%;
   height: auto;
   overflow: hidden;
 }
 
-.swiper-slide-content {
+
+.swiper-slide {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  text-align: center;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .swiper-image {
+  margin-top: 50px;
   width: 100%;
+  height: auto;
+  /* aspect-ratio: 2.5/4; */
   max-width: 300px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease;
 }
 
-.swiper-label {
-  margin-top: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-}
 
+.swiper-slide-active .swiper-image {
+  transform: scale(1.02);
+}

@@ -1,115 +1,152 @@
-.dashboard-container {
-  max-width: 600px;
-  margin: 5rem auto;
-  padding: 2rem;
-  text-align: center;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+.student-dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px;
+  padding: 30px;
+  background: #f8f9fa;
+  min-height: 100vh;
+  margin-top: 100px;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+/* LEFT COLUMN */
+.profile-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card h2 {
+  text-align: center;
+  margin-bottom: 15px;
   color: #333;
 }
 
-.user-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  text-align: left;
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
+.profile-card p {
+  margin: 8px 0;
+  font-size: 15px;
 }
 
-.user-info p {
-  margin: 5px 0;
-  font-size: 1rem;
-  color: #444;
-}
-
-textarea {
+.editbtn,
+.savebtn {
+  display: block;
   width: 100%;
-  /* Make it full width */
-  height: 150px;
-  /* Increase the height */
-  resize: vertical;
-  /* Allow users to resize only vertically */
-  padding: 8px;
-  font-size: 16px;
+  margin-top: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #5f6ed8;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.savebtn,
-.editbtn {
-  background: #f3a8a8;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
+.editbtn:hover,
+.savebtn:hover {
+  background-color: #4a58c3;
+}
+
+/* MIDDLE COLUMN */
+.projects-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.projects-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projects-section li {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
 }
 
 .chatbtn {
-  margin-top: 5px;
-  margin-bottom: 1rem;
-  background: rgb(218, 217, 217);
-  color: black;
+  margin-top: 10px;
+  padding: 8px 12px;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 6px;
+  background: #7b76cf;
+  color: #fff;
   cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
 }
 
-.chatbtn:hover {
-  background-color: rgb(195, 192, 192);
+.explorebtn {
+  margin-bottom: 30px;
+  background-color: #ff7b7b;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
 }
 
-.chatbox h3 {
-  margin-top: 0.8rem;
-  margin-bottom: 1rem;
+.explorebtn:hover {
+  background-color: #ff5252;
+}
+
+/* RIGHT COLUMN */
+.chatbox {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+
+.chat-input {
+  display: flex;
+  gap: 10px;
 }
 
 .chat-input input {
-  margin-top: 0.5rem;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
-.sendbtn {
-  margin-top: 5px;
-  background: rgb(218, 217, 217);
-  color: black;
+.chat-input button {
+  padding: 8px 16px;
+  background: #6c63ff;
+  color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
 }
 
-.sendbtn:hover {
-  background-color: rgb(195, 192, 192);
+.chat-input button:hover {
+  background: #5148cc;
 }
 
-/* Explore Projects Button */
-.explore-projects-btn {
-  margin-top: 20px;
-  background: #f3a8a8;
-  color: black;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
-}
-
-.explore-projects-btn:hover {
-  background: #218838;
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .student-dashboard-container {
+    grid-template-columns: 1fr;
+  }
 }

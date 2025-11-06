@@ -12,6 +12,7 @@ import Opportunities from "./pages/Opportunities";
 import Faculties from "./pages/Faculties";
 import SignUp from "./pages/SignUp";
 import Addproject from "./pages/Addproject";
+import ViewAppliedStudents from "./pages/ViewAppliedStudents";
 import Professorprofile from "./pages/Professorprofile";
 import "./index.css"; // Ensuring global styles are included
 
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/addproject" element={<Addproject />} />
         <Route path="/faculties" element={<Faculties />} />
         <Route path="/professor/:id" element={<Professorprofile />} />
+        <Route path="/project/:projectId/applied-students" element={<ViewAppliedStudents />} />
       </Routes>
     </Router>
   );

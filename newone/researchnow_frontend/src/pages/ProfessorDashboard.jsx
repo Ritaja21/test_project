@@ -94,37 +94,37 @@ const Dashboard = () => {
     };
   }, [professor]);
 
-  const fetchAppliedStudents = async (projectId) => {
-    try {
-      const token = localStorage.getItem("authToken");
-      const response = await axios.get(
-        `http://localhost:8000/api/project/${projectId}/applied-students`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setAppliedStudents((prev) => ({ ...prev, [projectId]: response.data.appliedStudents }));
-    } catch (error) {
-      console.error("Error fetching applied students:", error);
-    }
-  };
+  // const fetchAppliedStudents = async (projectId) => {
+  //   try {
+  //     const token = localStorage.getItem("authToken");
+  //     const response = await axios.get(
+  //       `http://localhost:8000/api/project/${projectId}/applied-students`,
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
+  //     setAppliedStudents((prev) => ({ ...prev, [projectId]: response.data.appliedStudents }));
+  //   } catch (error) {
+  //     console.error("Error fetching applied students:", error);
+  //   }
+  // };
 
 
 
-  const handleReview = async (projectId, studentId, status) => {
-    try {
-      const token = localStorage.getItem("authToken");
-      await axios.put(
-        `http://localhost:8000/api/project/${projectId}/review/${studentId}`,
-        { status },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      fetchAppliedStudents(projectId);
-      if (status === "accepted") {
-        openChat(projectId);
-      }
-    } catch (error) {
-      console.error("Error updating application status:", error);
-    }
-  };
+  // const handleReview = async (projectId, studentId, status) => {
+  //   try {
+  //     const token = localStorage.getItem("authToken");
+  //     await axios.put(
+  //       `http://localhost:8000/api/project/${projectId}/review/${studentId}`,
+  //       { status },
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
+  //     fetchAppliedStudents(projectId);
+  //     if (status === "accepted") {
+  //       openChat(projectId);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating application status:", error);
+  //   }
+  // };
 
 
   // ✅ Delete Project
@@ -172,7 +172,7 @@ const Dashboard = () => {
   };
 
 
-  // Open Chat and Fetch Chat ID
+  // // Open Chat and Fetch Chat ID
   const openChat = async (projectId) => {
     try {
       const token = localStorage.getItem("authToken");
@@ -188,7 +188,7 @@ const Dashboard = () => {
     }
   };
 
-  // Send Message using chatId
+  // // Send Message using chatId
   const sendMessage = async () => {
     if (!selectedProject || !message.trim()) return;
 
@@ -209,6 +209,8 @@ const Dashboard = () => {
       console.error("Error sending message:", error);
     }
   };
+
+
   // Handle input change
   const handleChange = (e) => {
     setUpdatedData({ ...updatedData, [e.target.name]: e.target.value });
@@ -237,150 +239,151 @@ const Dashboard = () => {
   if (!professor) return <p>Loading...</p>;
 
   return (
-    <div className="dashboard-container">
-      <h1>Professor Dashboard</h1>
-
-      {/* Professor Info Section */}
-      <div className="user-info">
-        <h2>
+    <div className="professor-dashboard-container">
+      {/*LEFT- Profile*/}
+      <div className="professor-left">
+        <div className="profile-card">
+          <h2>
+            {editable ? (
+              <input type="text" name="name" value={updatedData.name} onChange={handleChange} />
+            ) : (
+              professor.name
+            )}
+          </h2>
+          <p>
+            <strong>Email:</strong> {professor.email} (Cannot be changed)
+          </p>
+          <p>
+            <strong>Department:</strong>{" "}
+            {editable ? (
+              <input type="text" name="department" value={updatedData.department} onChange={handleChange} />
+            ) : (
+              professor.department
+            )}
+          </p>
+          <p>
+            <strong>Specialization:</strong>{" "}
+            {editable ? (
+              <input type="text" name="specialization" value={updatedData.specialization} onChange={handleChange} />
+            ) : (
+              professor.specialization
+            )}
+          </p>
+          <p>
+            <strong>Contact:</strong>{" "}
+            {editable ? (
+              <input type="text" name="contact" value={updatedData.contact} onChange={handleChange} />
+            ) : (
+              professor.contact
+            )}
+          </p>
+          <p>
+            <strong>About Me:</strong>{" "}
+            {editable ? (
+              <textarea name="about" value={updatedData.about} onChange={handleChange} />
+            ) : (
+              professor.about
+            )}
+          </p>
+          {/* Edit / Save Button */}
           {editable ? (
-            <input type="text" name="name" value={updatedData.name} onChange={handleChange} />
+            <button className="savebtn" onClick={handleSave}>Save Changes</button>
           ) : (
-            professor.name
+            <button className="editbtn" onClick={() => setEditable(true)}>Edit Profile</button>
           )}
-        </h2>
 
-        <p>
-          <strong>Department:</strong>{" "}
-          {editable ? (
-            <input type="text" name="department" value={updatedData.department} onChange={handleChange} />
-          ) : (
-            professor.department
-          )}
-        </p>
-
-        <p>
-          <strong>Specialization:</strong>{" "}
-          {editable ? (
-            <input type="text" name="specialization" value={updatedData.specialization} onChange={handleChange} />
-          ) : (
-            professor.specialization
-          )}
-        </p>
-
-        <p>
-          <strong>Contact:</strong>{" "}
-          {editable ? (
-            <input type="text" name="contact" value={updatedData.contact} onChange={handleChange} />
-          ) : (
-            professor.contact
-          )}
-        </p>
-
-        <p>
-          <strong>About Me:</strong>{" "}
-          {editable ? (
-            <textarea name="about" value={updatedData.about} onChange={handleChange} />
-          ) : (
-            professor.about
-          )}
-        </p>
-
-        <p>
-          <strong>Email:</strong> {professor.email} (Cannot be changed)
-        </p>
-
-        {/* Edit / Save Button */}
-        {editable ? (
-          <button className="savebtn" onClick={handleSave}>Save Changes</button>
-        ) : (
-          <button className="editbtn" onClick={() => setEditable(true)}>Edit Profile</button>
-        )}
+        </div>
       </div>
-
-      <div className="projects-section">
-        <h2>My Projects</h2>
-        {professor?.projects?.length ? (
-          <ul>
-            {professor.projects.map((project) => (
-              <li key={project._id}>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-
-                <div className="project-btns">  <button className="viewbtn" onClick={() => fetchAppliedStudents(project._id)}>
-                  View Applied Students
-                </button>
-                  <button
-                    className="deletebtn"
-                    onClick={() => handleDeleteProject(project._id)}
-                  >
-                    Delete Project
-                  </button></div>
-
-                {appliedStudents[project._id] && (
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Domain</th>
-                        <th>Email</th>
-                        <th>Review</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {appliedStudents[project._id].map((student) => (
-                        <tr key={student.student._id}>
-                          <td>{student.student.name}</td>
-                          <td>{student.student.skills}</td>
-                          <td>{student.student.email}</td>
-                          <td>
-                            <button className="acceptbtn" onClick={() => handleReview(project._id, student.student._id, "accepted")}>
-                              Accept
-                            </button>
-                            <button className="rejectbtn" onClick={() => handleReview(project._id, student.student._id, "rejected")}>
-                              Decline
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No projects added yet.</p>
-        )}
-      </div>
-      {/* Chatbox Section */}
-      {selectedProject && (
-        <div className="chatbox">
-          <h3>Project Chat</h3>
-          <div className="chat-messages">
-            {chat[selectedProject]?.map((msg, index) => (
-              <p key={index}>
-                <strong>{msg.sender.name || "You"}:</strong> {msg.content}
-              </p>
-            ))}
+      {/*MIDDLE- Projects*/}
+      <div className="professor-middle">
+        <div className="projects-section">
+          <div className="projects-header">
+            <h2>My Projects</h2>
+            <button className="explorebtn" onClick={() => navigate("/addproject")}>
+              + Add Project
+            </button>
           </div>
-          <div className="chat-input">
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type a message..."
-            />
-            <button className="sendbtn" onClick={sendMessage}>Send</button>
+
+          {professor?.projects?.length ? (
+            <ul>
+              {professor.projects.map((project) => (
+                <li key={project._id}>
+                  <h3>{project.title}</h3>
+
+                  <div className="project-btns">  <button className="viewbtn" onClick={() => navigate(`/project/${project._id}/applied-students`)}>
+                    View Applied Students
+                  </button>
+                    <button
+                      className="deletebtn"
+                      onClick={() => handleDeleteProject(project._id)}
+                    >
+                      Delete Project
+                    </button></div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No projects added yet.</p>
+          )}
+        </div>
+      </div>
+
+      {/* RIGHT- Chat*/}
+      <div className="professor-right">
+        <div className="chat-section">
+          <h3>Chats</h3>
+          <div style={{ marginBottom: 12 }}>
+            {professor.projects.length > 0 ? (
+              professor.projects.map((project) => (
+                <div key={project._id} className="chat-project-row">
+                  <div style={{ fontWeight: 600 }}>{project.title}</div>
+                  <button
+                    onClick={() => openChat(project._id)}
+                    style={{
+                      padding: "6px 12px",
+                      border: "none",
+                      backgroundColor: "#1976d2",
+                      color: "white",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Chat
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div>No projects available for chat.</div>
+            )}
+
+            {/* Chat Box*/}
+ {selectedProject && (
+          <div className="chatbox">
+            <h4>Chat - {professor.projects.find(p => p._id === selectedProject)?.title}</h4>
+            <div className="chat-messages">
+              {chat[selectedProject]?.map((msg, index) => (
+                <p key={index}>
+                  <strong>{msg.sender?.name || "You"}:</strong> {msg.content}
+                </p>
+              ))}
+            </div>
+            <div className="chat-input">
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Type a message..."
+              />
+              <button className="sendbtn" onClick={sendMessage}>
+                Send
+              </button>
+            </div>
+          </div>
+        )}
           </div>
         </div>
-      )}
-
-      {/* Explore Opportunities Button */}
-      <button className="explore-projects-btn" onClick={() => navigate("/addproject")}>
-        Add Project
-      </button>
-    </div>
+      </div>
+    </div >
   );
 };
 

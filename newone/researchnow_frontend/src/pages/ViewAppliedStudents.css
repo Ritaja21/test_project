@@ -1,0 +1,76 @@
+.applied-students-page {
+    padding: 40px;
+    background-color: #f7f9fc;
+    min-height: 100vh;
+}
+
+.back-btn {
+    background: #444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 30px;
+}
+
+.students-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.student-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.student-card:hover {
+    transform: translateY(-4px);
+}
+
+.student-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.accept-btn,
+.reject-btn {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.accept-btn {
+    background-color: #73dd8c;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #e15261;
+    color: white;
+}
+
+.no-students {
+    text-align: center;
+    color: #555;
+    font-size: 1.1rem;
+    margin-top: 40px;
+}
+
+.project-title {
+    color: #0077cc;
+    font-weight: 700;
+}

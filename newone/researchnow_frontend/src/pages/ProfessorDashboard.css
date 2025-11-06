@@ -1,109 +1,138 @@
-.dashboard-container {
-  max-width: 600px;
-  margin: 5rem auto;
-  padding: 2rem;
-  text-align: center;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  text-align: left;
+.professor-dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px;
+  padding: 20px;
   background: #f8f9fa;
-  padding: 1rem;
+  min-height: 100vh;
+  margin-top: 80px;
+}
+
+
+/* Left Profile Section */
+.professor-left .profile-card {
+  background: white;
+  padding: 25px;
   border-radius: 10px;
-  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.user-info p {
-  margin: 5px 0;
-  font-size: 1rem;
-  color: #444;
-}
 
-textarea {
-  width: 100%;
-  /* Make it full width */
-  height: 150px;
-  /* Increase the height */
-  resize: vertical;
-  /* Allow users to resize only vertically */
-  padding: 8px;
-  font-size: 16px;
-}
-
-.savebtn,
-.editbtn {
-  background: #f3a8a8;
-  color: black;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+.explorebtn {
+  margin-top: 10px;
+  background-color: rgb(215, 116, 59);
+  color: white;
+  border-radius: 20px;
+  padding: 10px 14px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
+  font-size: 0.9rem;
+  transition: 0.2s;
+  border: none;
+}
+
+.explorebtn:hover {
+  background-color: rgb(179, 96, 45);
 }
 
 
-.savebtn:hover,
+.profile-card h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.profile-card p {
+  margin: 10px 0;
+  font-size: 0.95rem;
+}
+
+.profile-card input,
+.profile-card textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.profile-card textarea {
+  height: 80px;
+}
+
+
+.editbtn,
+.savebtn,
+.viewbtn {
+  padding: 8px 14px;
+  /* margin-top: 10px; */
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+  border: none;
+}
+
+
+
+.editbtn {
+  background: rgb(94, 100, 212);
+  color: rgb(255, 255, 255);
+}
+
+.savebtn {
+  background: rgb(94, 100, 212);
+  color: white;
+}
+
 .editbtn:hover {
-  background: #f08585;
+  background-color: rgb(79, 84, 184);
+}
+
+.savebtn:hover {
+  background-color: rgb(79, 84, 184);
 }
 
 
-.project-card {
-  background: #f9f9f9;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+/* Middle Projects Section */
+.professor-middle .projects-section {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.project-card:hover {
-  transform: translateY(-2px);
-}
-
-.project-header {
+.projects-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.project-actions {
-  display: flex;
-  gap: 10px;
+
+/* Project Card */
+.project-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #e6e6e6;
+}
+
+.project-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .viewbtn,
 .deletebtn {
-  margin-top: 5px;
-  margin-bottom: 20px;
-  background: #6C809A;
+  background: #4b5f75;
   color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
 }
 
 .viewbtn:hover {
-  background: #4b596b;
+  background: #3f5063;
 }
-
 
 .deletebtn {
   background-color: #ff4d4d;
@@ -112,98 +141,73 @@ textarea {
 
 .deletebtn:hover {
   background-color: #e60000;
-  transform: scale(1.05);
 }
 
-/* Explore Projects Button */
-.explore-projects-btn {
-  margin-top: 20px;
-  background: #f3a8a8;
-  color: black;
+
+/* Right Chat Section */
+.professor-right .chat-section {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+
+/* Student Row */
+.chat-project-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.chat-btn {
+  background: #ef6666;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 6px 12px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
+  color: white;
+  font-size: 0.85rem;
+  transition: 0.2s;
 }
 
-.explore-projects-btn:hover {
-  background: #f08585;
+.chat-btn:hover {
+  background: #c94c4c;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-th,
-td {
+/* Chat Box */
+.chatbox {
+  margin-top: 10px;
   border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
+  padding: 15px;
+  border-radius: 8px;
+  background: #fafafa;
 }
 
-th {
-  background-color: #795663;
-  color: white;
-  font-weight: bold;
+.chat-messages {
+  height: 220px;
+  overflow-y: auto;
+  padding: 8px;
+  background: white;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tr:hover {
-  background-color: #f1f1f1;
-}
-
-.acceptbtn,
-.rejectbtn {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-}
-
-
-
-.acceptbtn {
-  background-color: #28a745;
-  /* Green for Accept */
-  color: white;
-  margin-bottom: 5px;
-}
-
-.acceptbtn:hover {
-  background-color: #218838;
-}
-
-.rejectbtn {
-  background-color: #dc3545;
-  /* Red for Decline */
-  color: white;
-}
-
-.rejectbtn:hover {
-  background-color: #cc2424;
-}
-
-
-.chatbox h3 {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
+.chat-input {
+  display: flex;
+  gap: 8px;
 }
 
 .chat-input input {
-  margin-top: 0.5rem;
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 .sendbtn {

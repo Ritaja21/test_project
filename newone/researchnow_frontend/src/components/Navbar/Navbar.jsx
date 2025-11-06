@@ -63,6 +63,8 @@ const Navbar = () => {
         width="250"
         alt="logo"
         className="logo"
+        onClick={() => navigate("/")}
+        style={{ cursor: "pointer" }}
         onError={(e) => (e.target.style.display = "none")} // Hide if logo fails to load
       />
 
@@ -73,7 +75,7 @@ const Navbar = () => {
         <li><NavLink to={getDashboardRoute()} onClick={() => setMenuOpen(false)}>Dashboard</NavLink></li>
         <li><NavLink to="/opportunities" onClick={() => setMenuOpen(false)}>Opportunities</NavLink></li>
         <li><NavLink to="/faculties" onClick={() => setMenuOpen(false)}>Faculties</NavLink></li>
-        <li><NavLink to="/ongoing-projects" onClick={() => setMenuOpen(false)}>Ongoing Projects</NavLink></li>
+        <li><NavLink to="/ongoing-projects" onClick={() => setMenuOpen(false)}>Research Papers</NavLink></li>
       </ul>
 
       {/* Login/Signup Buttons */}

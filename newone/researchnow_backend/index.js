@@ -1,6 +1,6 @@
 const express = require('express');
 const http = require("http");
-const {Server} = require("socket.io");
+const { Server } = require("socket.io");
 const cors = require('cors');
 const app = express();
 
@@ -43,10 +43,10 @@ io.on("connection", (socket) => {
   });
 });
 
-module.exports = {server, io, onlineUsers};
+module.exports = { server, io, onlineUsers };
 
 server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
 
 app.use(bodyParser.json());
@@ -63,8 +63,9 @@ app.use("/api/project", require("./Routes/projectRoutes"));// create, view, appl
 app.use("/api/professors", require("./Routes/professorRoutes"));//view professor dashboard for students
 app.use("/api/students", require("./Routes/studentRoutes"));//view student dashboard for professor
 app.use("/api/chat", require("./Routes/chatRoutes"));//get and send chat message
+app.use("/api/openalex", require("./Routes/openalexRoutes")); // proxy to OpenAlex works search
 
 app.get('/', (req, res) => {
-    res.json({ message: 'The API is working' });
+  res.json({ message: 'The API is working' });
 });
 
