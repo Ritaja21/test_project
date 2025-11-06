@@ -124,8 +124,7 @@
   font-weight: 600;
 }
 
-.viewbtn,
-.deletebtn {
+.viewbtn {
   background: #4b5f75;
   color: white;
 }
@@ -137,6 +136,13 @@
 .deletebtn {
   background-color: #ff4d4d;
   color: white;
+  padding: 8px 14px;
+  margin-left: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+  border: none;
 }
 
 .deletebtn:hover {
