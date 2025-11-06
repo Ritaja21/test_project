@@ -54,10 +54,8 @@ const Dashboard = () => {
         // Fetch projects from localStorage if new ones are added
         const localProjects = JSON.parse(localStorage.getItem("professorProjects")) || [];
 
-        setProfessor({
-          ...professorData,
-          projects: [...(professorData.projects || []), ...localProjects],
-        });
+        setProfessor(professorData);
+
 
       } catch (error) {
         console.error("Error fetching professor data:", error);
@@ -357,29 +355,29 @@ const Dashboard = () => {
             )}
 
             {/* Chat Box*/}
- {selectedProject && (
-          <div className="chatbox">
-            <h4>Chat - {professor.projects.find(p => p._id === selectedProject)?.title}</h4>
-            <div className="chat-messages">
-              {chat[selectedProject]?.map((msg, index) => (
-                <p key={index}>
-                  <strong>{msg.sender?.name || "You"}:</strong> {msg.content}
-                </p>
-              ))}
-            </div>
-            <div className="chat-input">
-              <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type a message..."
-              />
-              <button className="sendbtn" onClick={sendMessage}>
-                Send
-              </button>
-            </div>
-          </div>
-        )}
+            {selectedProject && (
+              <div className="chatbox">
+                <h4>Chat - {professor.projects.find(p => p._id === selectedProject)?.title}</h4>
+                <div className="chat-messages">
+                  {chat[selectedProject]?.map((msg, index) => (
+                    <p key={index}>
+                      <strong>{msg.sender?.name || "You"}:</strong> {msg.content}
+                    </p>
+                  ))}
+                </div>
+                <div className="chat-input">
+                  <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Type a message..."
+                  />
+                  <button className="sendbtn" onClick={sendMessage}>
+                    Send
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
